@@ -1,14 +1,16 @@
-import { Box, Button, Divider, IconButton, Link, TextField, Typography, useTheme } from "@mui/material"
+import { Box, Button, Divider, IconButton, Link, TextField, Typography, useMediaQuery, useTheme } from "@mui/material"
 import ChevronLeftOutlinedIcon from '@mui/icons-material/ChevronLeftOutlined';
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
 import {LazyLoadImage} from "react-lazy-load-image-component"
 import Brand from "@assets/image/brand.png"
 import ImageMujer from "@assets/image/mujer_frase.jpg"
 export default function LoginPage() {
+  const isDesktop = useMediaQuery("(min-width: 650px)")
     return (
       <Box
         className="Initial Layout"
         display="flex"
+        flexDirection={isDesktop ? "row":"column"}
         justifyContent="space-between"
         alignItems="center"
         gap={4}
@@ -19,23 +21,30 @@ export default function LoginPage() {
         maxWidth={1440}
       >
         <Form />
-        <Box position="relative" flexBasis="50%">
-          <LazyLoadImage src={ImageMujer} width={"100%"} height={"100%"} />
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            position="absolute"
-            right={"7%"}
-            bottom={"5%"}
-            gap={"20%"}
-          >
-            <CustomIconButton children={ChevronLeftOutlinedIcon} />
-            <CustomIconButton children={ChevronRightOutlinedIcon} />
-          </Box>
-        </Box>
+        {isDesktop && (<Card/>)}
       </Box>
     );
+}
+
+
+function Card() {
+  return (
+    <Box position="relative" flexBasis="50%">
+      <LazyLoadImage src={ImageMujer} width={"100%"} height={"100%"} />
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        position="absolute"
+        right={"7%"}
+        bottom={"5%"}
+        gap={"20%"}
+      >
+        <CustomIconButton children={ChevronLeftOutlinedIcon} />
+        <CustomIconButton children={ChevronRightOutlinedIcon} />
+      </Box>
+    </Box>
+  );
 }
 
 function CustomIconButton(props: any) {
@@ -54,6 +63,7 @@ function CustomIconButton(props: any) {
 }
 
 function Form() {
+  const isDesktop = useMediaQuery("(min-width: 650px)")
     const theme = useTheme();
     return (
         <Box flexBasis="50%" 
@@ -80,7 +90,7 @@ function Form() {
           <Divider sx={{ marginTop: "1.2rem" }} />
           <Box
             mt={4}
-            pl={1}
+            ml={isDesktop ? 1 : 0}
             mb={4}
             display="flex"
             flexDirection="column"
@@ -123,7 +133,9 @@ function Form() {
             </Button>
           </Box>
           <Divider />
-          <Box pl={1} pt={4} className="footer">
+          <Box pl={isDesktop ?  1 : 0}
+          textAlign={isDesktop ? "unset" : "center"}
+          pt={4} className="footer">
             <Typography
               variant="h6"
               fontWeight="bold"
@@ -147,6 +159,7 @@ function Form() {
           </Box>
         </Box>
     )
+
 
 
 
