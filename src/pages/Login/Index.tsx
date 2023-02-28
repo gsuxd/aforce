@@ -1,26 +1,64 @@
-import Brand from "@assets/image/brand.png"
-import { Box, Button, Divider, Link, TextField, Typography, useTheme } from "@mui/material"
+import { Box, Button, Divider, IconButton, Link, TextField, Typography, useTheme } from "@mui/material"
+import ChevronLeftOutlinedIcon from '@mui/icons-material/ChevronLeftOutlined';
+import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
 import {LazyLoadImage} from "react-lazy-load-image-component"
+import Brand from "@assets/image/brand.png"
+import ImageMujer from "@assets/image/mujer_frase.jpg"
 export default function LoginPage() {
     return (
-        <Box
+      <Box
         className="Initial Layout"
         display="flex"
-        justifyContent="center"
+        justifyContent="space-between"
         alignItems="center"
-        gap={2}
-        p={7}
-        >
-        <Form/>
-        <Box flexBasis="50%"></Box>
+        gap={4}
+        p={5}
+        pt={4}
+        ml="auto"
+        mr="auto"
+        maxWidth={1440}
+      >
+        <Form />
+        <Box position="relative" flexBasis="50%">
+          <LazyLoadImage src={ImageMujer} width={"100%"} height={"100%"} />
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            position="absolute"
+            right={"7%"}
+            bottom={"5%"}
+            gap={"20%"}
+          >
+            <CustomIconButton children={ChevronLeftOutlinedIcon} />
+            <CustomIconButton children={ChevronRightOutlinedIcon} />
+          </Box>
+        </Box>
       </Box>
+    );
+}
+
+function CustomIconButton(props: any) {
+    return (
+      <IconButton
+      {...props}
+      sx={{borderRadius: "50%", border: "1px solid #F0F1F4", ...props.sx ?? {} }}
+      children={
+          <props.children
+          {...props.children.props ?? {}}
+            sx={{width: "calc(75 * 100vw / 1556)", height: "calc(75 * 100vw / 1556)",color: "#F0F1F4" , ...props.children.sx ?? {}, }}
+          />
+        }
+      />
     );
 }
 
 function Form() {
     const theme = useTheme();
     return (
-        <Box flexBasis="50%" className="form">
+        <Box flexBasis="50%" 
+        maxWidth={512}
+        className="form">
           <Box
             display="flex"
             flexDirection="column"
@@ -29,7 +67,7 @@ function Form() {
             width={"95%"}
             className="title"
           >
-            <LazyLoadImage src={Brand} alt="logo" width="60%" />
+            <LazyLoadImage src={Brand} alt="logo" width="50%" />
             <Typography
               textAlign="center"
               fontSize="1.1em"
@@ -39,7 +77,7 @@ function Form() {
               Optimizando tus procesos con enterprice AI.
             </Typography>
           </Box>
-          <Divider style={{ marginTop: "1.2rem" }} />
+          <Divider sx={{ marginTop: "1.2rem" }} />
           <Box
             mt={4}
             pl={1}
@@ -78,7 +116,7 @@ function Form() {
             </Box>
             <Button
               fullWidth
-              style={{ fontFamily: "araboto-normal" }}
+              sx={{ fontFamily: "araboto-normal" }}
               variant="contained"
             >
               Acceder
@@ -100,7 +138,7 @@ function Form() {
             </Typography>
             <Box mt={2}>
               <Link
-                style={{ fontFamily: "araboto-normal", textDecoration: "none" }}
+                sx={{ fontFamily: "araboto-normal", textDecoration: "none" }}
                 color={theme.palette.primary.main}
               >
                 Registrarse en AIForce
@@ -109,4 +147,8 @@ function Form() {
           </Box>
         </Box>
     )
+
+
+
+
 } 
