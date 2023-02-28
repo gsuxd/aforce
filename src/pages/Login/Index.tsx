@@ -3,7 +3,8 @@ import ChevronLeftOutlinedIcon from '@mui/icons-material/ChevronLeftOutlined';
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
 import {LazyLoadImage} from "react-lazy-load-image-component"
 import Brand from "@assets/image/brand.png"
-import ImageMujer from "@assets/image/mujer_frase.jpg"
+import { useState } from "react";
+import MujerFrase from "@assets/image/mujer_frase.jpg";
 export default function LoginPage() {
   const isDesktop = useMediaQuery("(min-width: 650px)")
     return (
@@ -28,9 +29,11 @@ export default function LoginPage() {
 
 
 function Card() {
+  const images = [MujerFrase]
+  const [actual, setActual] = useState(0)
   return (
     <Box position="relative" flexBasis="50%">
-      <LazyLoadImage src={ImageMujer} width={"100%"} height={"100%"} />
+      <LazyLoadImage src={images[actual]} width={"100%"} height={"100%"} />
       <Box
         display="flex"
         alignItems="center"
@@ -40,8 +43,24 @@ function Card() {
         bottom={"5%"}
         gap={"20%"}
       >
-        <CustomIconButton children={ChevronLeftOutlinedIcon} />
-        <CustomIconButton children={ChevronRightOutlinedIcon} />
+        <CustomIconButton
+        onClick={() => {
+          if (actual === 0) {
+            setActual(images.length-1)
+            return;
+          }
+          setActual(actual - 1)
+        }}
+        children={ChevronLeftOutlinedIcon} />
+        <CustomIconButton 
+        onClick={() => {
+          if (actual === images.length - 1) {
+            setActual(0)
+            return;
+          }
+          setActual(actual + 1)
+        }}
+        children={ChevronRightOutlinedIcon} />
       </Box>
     </Box>
   );
