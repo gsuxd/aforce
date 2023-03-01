@@ -25,7 +25,7 @@ const routes: RouteObject[] = [
         element: <DashboardLayout/>,
         children: [
           {
-            path: "",
+            path: "*",
             element: <DashboardPage/>
           }
         ]
