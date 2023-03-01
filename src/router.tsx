@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { createBrowserRouter, RouteObject } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouteObject } from "react-router-dom";
 import SuspenseLoader from "@components/SuspenseLoader";
 import { TransitionPage } from "@components/TransitionPage";
 import DashboardLayout from "@components/DashboardLayout/Index";
@@ -29,6 +29,10 @@ const routes: RouteObject[] = [
             element: <DashboardPage/>
           }
         ]
+    },
+    {
+      path: "*",
+      element: <Navigate to="/login"/>
     }
 ];
 
