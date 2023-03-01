@@ -9,13 +9,13 @@ export const theme = createTheme({
     typography: {
         allVariants: {
             fontFamily: "araboto-normal"
-        }
+        },
     },
     components: {
         MuiLink: {
             defaultProps:{
-                style: {
-                    fontFamily: "araboto-normal"
+                sx: {
+                    fontFamily: "araboto-normal",
                 }
             }
         }

@@ -15,7 +15,6 @@ export default function DashboardLayout() {
           >
           <Box
             mt={isDesktop? 0 : 4}
-            p={2}
             ml={ isDesktop? "230px" : 0}
         >
             <Outlet />

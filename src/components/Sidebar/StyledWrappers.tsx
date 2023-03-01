@@ -70,7 +70,7 @@ export const SubMenuWrapper = styled(Box)(
             }
             
             .MuiButton-endIcon {
-              color: #fffF;
+              color: #fff;
               margin-left: auto;
               opacity: .8;
               font-size: ${theme.typography.pxToRem(20)};
@@ -79,11 +79,11 @@ export const SubMenuWrapper = styled(Box)(
             &.active,
             &:hover {
               background-color: ${alpha("#fffF", 0.06)};
-              color: #fffF;
+              color: #fff;
   
               .MuiButton-startIcon,
               .MuiButton-endIcon {
-                color: #fffF;
+                color: #fff;
               }
             }
           }
