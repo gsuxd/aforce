@@ -5,6 +5,7 @@ import {LazyLoadImage} from "react-lazy-load-image-component"
 import Brand from "@assets/image/brand.png"
 import { useState } from "react";
 import MujerFrase from "@assets/image/mujer_frase.jpg";
+import { useNavigate } from "react-router-dom";
 export default function LoginPage() {
   const isDesktop = useMediaQuery("(min-width: 650px)")
     return (
@@ -83,7 +84,8 @@ function CustomIconButton(props: any) {
 
 function Form() {
   const isDesktop = useMediaQuery("(min-width: 650px)")
-    const theme = useTheme();
+  const navigate = useNavigate();
+  const theme = useTheme();
     return (
         <Box flexBasis="50%" 
         maxWidth={512}
@@ -146,6 +148,7 @@ function Form() {
             <Button
               fullWidth
               sx={{ fontFamily: "araboto-normal" }}
+              onClick={() => navigate("/dashboard/actions")}
               variant="contained"
             >
               Acceder
