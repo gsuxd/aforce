@@ -25,6 +25,10 @@ const routes: RouteObject[] = [
         element: <DashboardLayout/>,
         children: [
           {
+            path: "",
+            element: <Navigate to="/dashboard/actions"/>
+          },
+          {
             path: "*",
             element: <DashboardPage/>
           }
