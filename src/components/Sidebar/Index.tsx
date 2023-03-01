@@ -17,19 +17,34 @@ import brand from "@assets/image/brand_white.png";
 import { MenuWrapper, SubMenuWrapper } from "./StyledWrappers";
 import SidebarItem from "./SidebarItem";
 
+function CustomDivider(props: any) {
+  return (
+    <Box display="flex" justifyContent="center" alignItems="center">
+      <Divider color="#fcfcfc" sx={{ width: "90%" }} {...props} />
+    </Box>
+  );
+}
+
 export default function Sidebar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const isDesktop = useMediaQuery("(min-width:650px)");
+  const isDesktop = useMediaQuery("(min-width:600px)");
   const theme = useTheme();
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
+  
   const drawer = (
-      <MenuWrapper>
+      <MenuWrapper
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      height="100%"
+      justifyContent="space-between"
+      >
+        <Box>
         <Toolbar
           sx={{
-            padding: "4rem",
+            padding: isDesktop ? "4rem" : "3.5rem",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -37,59 +52,85 @@ export default function Sidebar() {
         >
           <LazyLoadImage src={brand} />
         </Toolbar>
-        <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        ><Divider color="#fcfcfc" sx={{ width: "90%"}}/></Box>
+        <CustomDivider/>
         <List>
           <SubMenuWrapper>
             <List>
               <SidebarItem
               to="/dashboard/actions"
               icon={<BoltOutlined/>}
-              onClick={() => setMobileOpen(false)}
+              onClick={handleDrawerToggle}
               >
                 Actions
               </SidebarItem>
               <SidebarItem
               to="/dashboard/resultados"
               icon={<InsertChartOutlined/>}
-              onClick={() => setMobileOpen(false)}
+              onClick={handleDrawerToggle}
               >
                 Resultados
               </SidebarItem>
               <SidebarItem
               to="/dashboard/facturacion"
               icon={<ArticleOutlined/>}
-              onClick={() => setMobileOpen(false)}
+              onClick={handleDrawerToggle}
               >
                 Facturación
               </SidebarItem>
               <SidebarItem
               to="/dashboard/usuarios"
               icon={<PersonOutline/>}
-              onClick={() => setMobileOpen(false)}
+              onClick={handleDrawerToggle}
               >
                 Usuarios
               </SidebarItem>
               <SidebarItem
               to="/dashboard/ajustes"
               icon={<TuneOutlined/>}
-              onClick={() => setMobileOpen(false)}
+              onClick={handleDrawerToggle}
               >
                 Ajustes
               </SidebarItem>
             </List>
           </SubMenuWrapper>
         </List>
+        </Box>
+        <Box>
+        <CustomDivider/>
+          <SubMenuWrapper>
+            <List>
+              <SidebarItem
+              to="/dashboard/chat-soporte"
+              icon={<BoltOutlined/>}
+              onClick={handleDrawerToggle}
+              >
+                Chat Soporte
+              </SidebarItem>
+              <SidebarItem
+              to="/dashboard/contacto"
+              icon={<BoltOutlined/>}
+              onClick={handleDrawerToggle}
+              >
+                Contacto
+              </SidebarItem>
+              <SidebarItem
+              to="/login"
+              icon={<BoltOutlined/>}
+              onClick={handleDrawerToggle}
+              >
+                Cerrar Sesión
+              </SidebarItem>
+            </List>
+          </SubMenuWrapper>
+        </Box>
       </MenuWrapper>
   );
-  const drawerWidth = 250;
+  const drawerWidth = isDesktop ? 230 : 260;
   return (
     <>
       <CssBaseline />
-      <AppBar
+      {!isDesktop && (
+        <AppBar
         position="fixed"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
@@ -110,6 +151,7 @@ export default function Sidebar() {
           </IconButton>
         </Toolbar>
       </AppBar>
+      )}
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
@@ -153,16 +195,7 @@ export default function Sidebar() {
           </Drawer>
         )}
       </Box>
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-        }}
-      >
-        <Toolbar />
-      </Box>
     </>
   );
 }
+
