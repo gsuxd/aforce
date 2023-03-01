@@ -167,7 +167,6 @@ export default function Sidebar() {
               keepMounted: true, // Better open performance on mobile.
             }}
             sx={{
-              display: { xs: "block", sm: "none" },
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
                 width: drawerWidth,
@@ -182,7 +181,6 @@ export default function Sidebar() {
           <Drawer
             variant="permanent"
             sx={{
-              display: { xs: "none", sm: "block" },
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
                 width: drawerWidth,

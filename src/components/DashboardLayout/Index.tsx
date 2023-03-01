@@ -1,17 +1,25 @@
-import { Box, useMediaQuery } from "@mui/material";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import Sidebar from "../Sidebar/Index";
 
 export default function DashboardLayout() {
     const isDesktop = useMediaQuery("(min-width:600px)");
+    const theme = useTheme();
     return (
       <>
-        <Box display="flex">
+        <Box
+        sx={{flex: 1}}
+        >
           <Sidebar />
           <Box
-          mt={isDesktop? 0 : 4}
           >
-          <Outlet />
+          <Box
+            mt={isDesktop? 0 : 4}
+            p={2}
+            ml={ isDesktop? "230px" : 0}
+        >
+            <Outlet />
+        </Box>
           </Box>
         </Box>
       </>
